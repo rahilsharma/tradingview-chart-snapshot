@@ -1,4 +1,5 @@
-  try {
+app.post('/tvSnapshot',function(req,res){
+        try {
             var dataObject = JSON.parse(req.body.images);
             var panelCount = dataObject.charts[0].panes.length;
             console.log(panelCount);
@@ -107,7 +108,7 @@
                 fs.readFile(file, function (err, data) {
                     //  console.log("reading file");
                     if (err) throw err; // Something went wrong!
-                    var s3bucket = new AWS.S3({params: {Bucket: 'rahilsharma'}});
+                    var s3bucket = new AWS.S3({params: {Bucket: 'talkoot-users'}});
                     s3bucket.createBucket(function () {
                         var params = {
                             Key: dateToday + ".png", //file.name doesn't exist as a property
@@ -137,3 +138,4 @@
             console.log(ex);
             res.status(500).send(ex);
         }
+    })
